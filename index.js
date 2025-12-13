@@ -57,6 +57,7 @@ app.get("/logout", (req, res) => {
 });
 
 app.get("/secrets", async (req, res) => {
+  // TODO: Update this to pull in the user secret to render in secrets.ejs
   if (req.isAuthenticated()) {
     try {
       const result = await db.query("SELECT secret FROM users WHERE email = $1", [
@@ -71,7 +72,6 @@ app.get("/secrets", async (req, res) => {
     } catch (err) {
       console.log(err);
     }
-    // TODO: Update this to pull in the user secret to render in secrets.ejs
   } else {
     res.redirect("/login");
   }
